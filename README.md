@@ -1,5 +1,4 @@
 # My-Web-Card
-# Project Name
 
 Simple Python backend that serves Jinja templates.
 
