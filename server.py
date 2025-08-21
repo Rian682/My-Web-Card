@@ -1,43 +1,16 @@
+import os
 from flask import Flask, render_template
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")  # The folder needs to be named 'templates'. if there's another folder
-    # inside that templates folder for exmaple 'new' and inside that folder is the html file then you have to write
-    # "render_template("new/index.html")"
-# if you have an IMAGE or CSS file to show in your site then have to create a folder named 'static',
-# then use "static/image.png" or "static/style.css"
-
-
-# @app.route("/summon.html")
-# def summon():
-#     return render_template("summon.html")
-
+    # Flask looks for templates in the "templates" folder by default
+    return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # Use PORT from the environment (Render sets this). Default to 5000 locally.
+    port = int(os.environ.get("PORT", 5000))
+    # Control debug via env too; default to True for local dev, set FLASK_DEBUG=0 on production
+    debug = os.environ.get("FLASK_DEBUG", "1") == "1"
+    app.run(host="0.0.0.0", port=port, debug=debug)
